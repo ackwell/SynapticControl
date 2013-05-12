@@ -1,6 +1,7 @@
-﻿using System.Windows.Forms;
-using Microsoft.Win32;
+﻿using Microsoft.Win32;
 using System;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace SynapticControl
 {
@@ -17,36 +18,55 @@ namespace SynapticControl
 
         private void populateData()
         {
+            // Add Default entry
+            this.listView_apps.Items.Add(this.createListViewItem("(Default)","---","---","---"));
+
             // Loop over the applications defined in the registry and add them to the listView
             RegistryKey appExes = Registry.LocalMachine.OpenSubKey(REGISTRY_APP_EXECUTABLES);
             foreach (string subKeyName in appExes.GetSubKeyNames())
             {
-                ListViewItem item = new ListViewItem(subKeyName);
                 using (RegistryKey tempKey = appExes.OpenSubKey(subKeyName))
                 {
-                    item.SubItems.Add((string)tempKey.GetValue("AppExe"));
-                    item.SubItems.Add((string)tempKey.GetValue("AppClassName"));
                     int appMatchType = Convert.ToInt32(tempKey.GetValue("AppMatchType", -1));
-                    if (appMatchType != -1)
-                    {
-                        item.SubItems.Add(appMatchType.ToString());
-                    }
+                    this.listView_apps.Items.Add(this.createListViewItem(
+                        subKeyName,
+                        (string)tempKey.GetValue("AppExe"),
+                        (string)tempKey.GetValue("AppClassName"),
+                        appMatchType==-1? "" : appMatchType.ToString()
+                    ));
                 }
-                this.listView_apps.Items.Add(item);
             }
             appExes.Close();
         }
 
+        private ListViewItem createListViewItem(string friendlyName, string exe, string className, string matchType)
+        {
+            ListViewItem item = new ListViewItem(friendlyName);
+            item.UseItemStyleForSubItems = false;
+            item.Font = new Font(item.Font, FontStyle.Bold);
+
+            item.SubItems.Add(exe);
+            item.SubItems.Add(className);
+            item.SubItems.Add(matchType);
+
+            return item;
+        }
+
         private void resizeColumns()
         {
+            // First col should be visible.
+            ColumnHeader firstCol = this.listView_apps.Columns[0];
+            firstCol.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+            int remainingWidth = this.listView_apps.Width - firstCol.Width;
+
             // Resize the column headers
-            for (int i = 0; i < this.listView_apps.Columns.Count - 1; i++)
+            for (int i = 1; i < this.listView_apps.Columns.Count - 1; i++)
             {
                 ColumnHeader head = this.listView_apps.Columns[i];
                 head.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                if (head.Width > this.listView_apps.Width / this.listView_apps.Columns.Count)
+                if (head.Width > remainingWidth / (this.listView_apps.Columns.Count - 1))
                 {
-                    head.Width = this.listView_apps.Width / this.listView_apps.Columns.Count;
+                    head.Width = remainingWidth / (this.listView_apps.Columns.Count - 1);
                 }
             }
 
