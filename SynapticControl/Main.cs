@@ -79,7 +79,10 @@ namespace SynapticControl
             if (this.listView_apps.SelectedItems.Count == 0) return;
 
             //I've disabled MultiSelect, so if there is something selected, there'll only ever be one.
-            ListViewItem item = this.listView_apps.SelectedItems[0];
+            ListViewItem toEdit = this.listView_apps.SelectedItems[0];
+
+            AppEdit appEditDialog = new AppEdit(toEdit.Text);
+            appEditDialog.ShowDialog(this);
         }
 
         private void removeSelectedItem()

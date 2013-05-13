@@ -19,6 +19,6 @@ namespace SynapticControl
             DEFAULT_APP_NAME="(Default)";
 
         // Array of registry paths that contain application keys
-        public static string[] REG_APP_KEY_PATHS = new string[] { Global.REG_APP_EXECUTABLES, Global.REG_APP_ACTIONS, Global.REG_APP_MACROS };
+        public static string[] REG_APP_KEY_PATHS = new string[] { REG_APP_EXECUTABLES, REG_APP_ACTIONS, REG_APP_MACROS };
     }
 }

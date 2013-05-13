@@ -56,7 +56,7 @@
             this.panel_main.RowCount = 2;
             this.panel_main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.panel_main.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.panel_main.Size = new System.Drawing.Size(560, 505);
+            this.panel_main.Size = new System.Drawing.Size(474, 551);
             this.panel_main.TabIndex = 0;
             // 
             // listView_apps
@@ -75,7 +75,7 @@
             this.listView_apps.Margin = new System.Windows.Forms.Padding(0);
             this.listView_apps.MultiSelect = false;
             this.listView_apps.Name = "listView_apps";
-            this.listView_apps.Size = new System.Drawing.Size(560, 476);
+            this.listView_apps.Size = new System.Drawing.Size(474, 522);
             this.listView_apps.TabIndex = 0;
             this.listView_apps.UseCompatibleStateImageBehavior = false;
             this.listView_apps.View = System.Windows.Forms.View.Details;
@@ -104,7 +104,7 @@
             // 
             // btn_add
             // 
-            this.btn_add.Location = new System.Drawing.Point(3, 479);
+            this.btn_add.Location = new System.Drawing.Point(3, 525);
             this.btn_add.Name = "btn_add";
             this.btn_add.Size = new System.Drawing.Size(75, 23);
             this.btn_add.TabIndex = 1;
@@ -114,7 +114,7 @@
             // btn_edit
             // 
             this.btn_edit.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.btn_edit.Location = new System.Drawing.Point(242, 479);
+            this.btn_edit.Location = new System.Drawing.Point(199, 525);
             this.btn_edit.Name = "btn_edit";
             this.btn_edit.Size = new System.Drawing.Size(75, 23);
             this.btn_edit.TabIndex = 2;
@@ -124,7 +124,7 @@
             // 
             // btn_remove
             // 
-            this.btn_remove.Location = new System.Drawing.Point(482, 479);
+            this.btn_remove.Location = new System.Drawing.Point(396, 525);
             this.btn_remove.Name = "btn_remove";
             this.btn_remove.Size = new System.Drawing.Size(75, 23);
             this.btn_remove.TabIndex = 3;
@@ -136,8 +136,9 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(570, 515);
+            this.ClientSize = new System.Drawing.Size(484, 561);
             this.Controls.Add(this.panel_main);
+            this.MaximizeBox = false;
             this.Name = "Main";
             this.Padding = new System.Windows.Forms.Padding(5);
             this.Text = "SynapticsControl";
