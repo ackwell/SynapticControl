@@ -80,6 +80,14 @@ namespace SynapticControl
             ListViewItem item = this.listView_apps.SelectedItems[0];
         }
 
+        private void removeSelectedItem()
+        {
+            if (this.listView_apps.SelectedItems.Count == 0) return;
+
+            // Get the selected item's main text, it's the Key used through the reg.
+            string toRemove = this.listView_apps.SelectedItems[0].Text;
+        }
+
         // EVENT HANDLERS
         private void Main_Load(object sender, System.EventArgs e)
         {
@@ -97,11 +105,6 @@ namespace SynapticControl
             this.editSelectedItem();
         }
 
-        private void btn_edit_Click(object sender, EventArgs e)
-        {
-            this.editSelectedItem();
-        }
-
         // If the Default entry was selected, disable the Remove button
         private void listView_apps_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
         {
@@ -110,6 +113,11 @@ namespace SynapticControl
                 this.btn_remove.Enabled = false;
             else
                 this.btn_remove.Enabled = true;
+        }
+
+        private void btn_edit_Click(object sender, EventArgs e)
+        {
+            this.editSelectedItem();
         }
     }
 }
