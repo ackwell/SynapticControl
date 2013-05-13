@@ -1,7 +1,9 @@
 ﻿using Microsoft.Win32;
 using System;
+using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Security.AccessControl;
 
 namespace SynapticControl
 {
@@ -85,7 +87,19 @@ namespace SynapticControl
             if (this.listView_apps.SelectedItems.Count == 0) return;
 
             // Get the selected item's main text, it's the Key used through the reg.
-            string toRemove = this.listView_apps.SelectedItems[0].Text;
+            ListViewItem toRemove = this.listView_apps.SelectedItems[0];
+            
+            foreach (string regPath in Global.REG_APP_KEY_PATHS)
+            {
+                RegistryKey regParent = Registry.LocalMachine.OpenSubKey(regPath, true);
+
+                // Delete the key tree for the application.
+                try { regParent.DeleteSubKeyTree(toRemove.Text); }
+                // If it raises an ArgumentException, ignore. Just means the application didn't have a key in that parent.
+                catch (ArgumentException) { }
+            }
+            // Remove the ListView entry for the item
+            this.listView_apps.Items.Remove(toRemove);
         }
 
         // EVENT HANDLERS
@@ -118,6 +132,11 @@ namespace SynapticControl
         private void btn_edit_Click(object sender, EventArgs e)
         {
             this.editSelectedItem();
+        }
+
+        private void btn_remove_Click(object sender, EventArgs e)
+        {
+            this.removeSelectedItem();
         }
     }
 }
