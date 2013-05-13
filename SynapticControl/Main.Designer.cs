@@ -70,13 +70,16 @@
             this.panel_main.SetColumnSpan(this.listView_apps, 3);
             this.listView_apps.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView_apps.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listView_apps.FullRowSelect = true;
             this.listView_apps.Location = new System.Drawing.Point(0, 0);
             this.listView_apps.Margin = new System.Windows.Forms.Padding(0);
+            this.listView_apps.MultiSelect = false;
             this.listView_apps.Name = "listView_apps";
             this.listView_apps.Size = new System.Drawing.Size(560, 476);
             this.listView_apps.TabIndex = 0;
             this.listView_apps.UseCompatibleStateImageBehavior = false;
             this.listView_apps.View = System.Windows.Forms.View.Details;
+            this.listView_apps.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_apps_MouseDoubleClick);
             // 
             // col_appName
             // 

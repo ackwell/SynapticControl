@@ -1,16 +1,12 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Windows.Forms;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace SynapticControl
 {
     public partial class Main : Form
     {
-        public static string REGISTRY_SYNAPTICS_ROOT = @"SOFTWARE\Synaptics";
-
-        private static string REGISTRY_APP_EXECUTABLES = REGISTRY_SYNAPTICS_ROOT + @"\SynTPEnh\OSD\TouchPad\AppProfiles";
-
         public Main()
         {
             InitializeComponent();
@@ -19,10 +15,10 @@ namespace SynapticControl
         private void populateData()
         {
             // Add Default entry
-            this.listView_apps.Items.Add(this.createListViewItem("(Default)","---","---","---"));
+            this.listView_apps.Items.Add(this.createListViewItem(Global.DEFAULT_APP_NAME,"---","---","---"));
 
             // Loop over the applications defined in the registry and add them to the listView
-            RegistryKey appExes = Registry.LocalMachine.OpenSubKey(REGISTRY_APP_EXECUTABLES);
+            RegistryKey appExes = Registry.LocalMachine.OpenSubKey(Global.REG_APP_EXECUTABLES);
             foreach (string subKeyName in appExes.GetSubKeyNames())
             {
                 using (RegistryKey tempKey = appExes.OpenSubKey(subKeyName))
@@ -73,6 +69,7 @@ namespace SynapticControl
             this.listView_apps.Columns[this.listView_apps.Columns.Count - 1].Width = -2;
         }
 
+        // EVENT HANDLERS
         private void Main_Load(object sender, System.EventArgs e)
         {
             this.populateData();
@@ -82,6 +79,14 @@ namespace SynapticControl
         private void Main_ResizeEnd(object sender, System.EventArgs e)
         {
             this.resizeColumns();
+        }
+
+        private void listView_apps_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            foreach (ListViewItem item in this.listView_apps.SelectedItems)
+            {
+                System.Diagnostics.Debug.WriteLine(item.Text);
+            }
         }
     }
 }
