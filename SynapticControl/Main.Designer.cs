@@ -34,9 +34,9 @@
             this.col_appExe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_appClassName = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_appMatchType = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.btn_add = new System.Windows.Forms.Button();
+            this.btn_edit = new System.Windows.Forms.Button();
+            this.btn_remove = new System.Windows.Forms.Button();
             this.panel_main.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -47,9 +47,9 @@
             this.panel_main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.panel_main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle());
             this.panel_main.Controls.Add(this.listView_apps, 0, 0);
-            this.panel_main.Controls.Add(this.button1, 0, 1);
-            this.panel_main.Controls.Add(this.button2, 1, 1);
-            this.panel_main.Controls.Add(this.button3, 2, 1);
+            this.panel_main.Controls.Add(this.btn_add, 0, 1);
+            this.panel_main.Controls.Add(this.btn_edit, 1, 1);
+            this.panel_main.Controls.Add(this.btn_remove, 2, 1);
             this.panel_main.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_main.Location = new System.Drawing.Point(5, 5);
             this.panel_main.Name = "panel_main";
@@ -79,6 +79,7 @@
             this.listView_apps.TabIndex = 0;
             this.listView_apps.UseCompatibleStateImageBehavior = false;
             this.listView_apps.View = System.Windows.Forms.View.Details;
+            this.listView_apps.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.listView_apps_ItemSelectionChanged);
             this.listView_apps.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_apps_MouseDoubleClick);
             // 
             // col_appName
@@ -101,33 +102,34 @@
             this.col_appMatchType.Text = "AppMatchType";
             this.col_appMatchType.Width = 100;
             // 
-            // button1
+            // btn_add
             // 
-            this.button1.Location = new System.Drawing.Point(3, 479);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btn_add.Location = new System.Drawing.Point(3, 479);
+            this.btn_add.Name = "btn_add";
+            this.btn_add.Size = new System.Drawing.Size(75, 23);
+            this.btn_add.TabIndex = 1;
+            this.btn_add.Text = "Add";
+            this.btn_add.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btn_edit
             // 
-            this.button2.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.button2.Location = new System.Drawing.Point(242, 479);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btn_edit.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.btn_edit.Location = new System.Drawing.Point(242, 479);
+            this.btn_edit.Name = "btn_edit";
+            this.btn_edit.Size = new System.Drawing.Size(75, 23);
+            this.btn_edit.TabIndex = 2;
+            this.btn_edit.Text = "Edit";
+            this.btn_edit.UseVisualStyleBackColor = true;
+            this.btn_edit.Click += new System.EventHandler(this.btn_edit_Click);
             // 
-            // button3
+            // btn_remove
             // 
-            this.button3.Location = new System.Drawing.Point(482, 479);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 3;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btn_remove.Location = new System.Drawing.Point(482, 479);
+            this.btn_remove.Name = "btn_remove";
+            this.btn_remove.Size = new System.Drawing.Size(75, 23);
+            this.btn_remove.TabIndex = 3;
+            this.btn_remove.Text = "Remove";
+            this.btn_remove.UseVisualStyleBackColor = true;
             // 
             // Main
             // 
@@ -153,9 +155,9 @@
         private System.Windows.Forms.ColumnHeader col_appExe;
         private System.Windows.Forms.ColumnHeader col_appClassName;
         private System.Windows.Forms.ColumnHeader col_appMatchType;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button btn_add;
+        private System.Windows.Forms.Button btn_edit;
+        private System.Windows.Forms.Button btn_remove;
 
 
     }

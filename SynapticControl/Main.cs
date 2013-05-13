@@ -12,6 +12,7 @@ namespace SynapticControl
             InitializeComponent();
         }
 
+        // populate the listView with the data from the registry
         private void populateData()
         {
             // Add Default entry
@@ -48,6 +49,7 @@ namespace SynapticControl
             return item;
         }
 
+        // Resize the ListView's columns to fill the avaliable space
         private void resizeColumns()
         {
             // First col should be visible.
@@ -69,6 +71,15 @@ namespace SynapticControl
             this.listView_apps.Columns[this.listView_apps.Columns.Count - 1].Width = -2;
         }
 
+        private void editSelectedItem()
+        {
+            // Make sure an item is selected.
+            if (this.listView_apps.SelectedItems.Count == 0) return;
+
+            //I've disabled MultiSelect, so if there is something selected, there'll only ever be one.
+            ListViewItem item = this.listView_apps.SelectedItems[0];
+        }
+
         // EVENT HANDLERS
         private void Main_Load(object sender, System.EventArgs e)
         {
@@ -80,13 +91,25 @@ namespace SynapticControl
         {
             this.resizeColumns();
         }
-
+        
         private void listView_apps_MouseDoubleClick(object sender, MouseEventArgs e)
         {
-            foreach (ListViewItem item in this.listView_apps.SelectedItems)
-            {
-                System.Diagnostics.Debug.WriteLine(item.Text);
-            }
+            this.editSelectedItem();
+        }
+
+        private void btn_edit_Click(object sender, EventArgs e)
+        {
+            this.editSelectedItem();
+        }
+
+        // If the Default entry was selected, disable the Remove button
+        private void listView_apps_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (this.listView_apps.SelectedItems.Count == 0) return;
+            if (this.listView_apps.SelectedItems[0].Text == Global.DEFAULT_APP_NAME)
+                this.btn_remove.Enabled = false;
+            else
+                this.btn_remove.Enabled = true;
         }
     }
 }
