@@ -1,9 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Linq;
 using System.Drawing;
 using System.Windows.Forms;
-using System.Security.AccessControl;
 
 namespace SynapticControl
 {
