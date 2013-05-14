@@ -98,6 +98,8 @@ namespace SynapticControl
                 try { regParent.DeleteSubKeyTree(toRemove.Text); }
                 // If it raises an ArgumentException, ignore. Just means the application didn't have a key in that parent.
                 catch (ArgumentException) { }
+
+                regParent.Close();
             }
             // Remove the ListView entry for the item
             this.listView_apps.Items.Remove(toRemove);

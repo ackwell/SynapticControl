@@ -47,6 +47,8 @@ namespace SynapticControl
                     pair.Value.Text = value;
                 }
             }
+
+            appDetails.Close();
         }
 
         // EVENT HANDLERS
