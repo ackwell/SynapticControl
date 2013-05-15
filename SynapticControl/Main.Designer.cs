@@ -142,7 +142,7 @@
             this.MaximizeBox = false;
             this.Name = "Main";
             this.Padding = new System.Windows.Forms.Padding(5);
-            this.Text = "SynapticsControl";
+            this.Text = "SynapticControl";
             this.Load += new System.EventHandler(this.Main_Load);
             this.ResizeEnd += new System.EventHandler(this.Main_ResizeEnd);
             this.panel_main.ResumeLayout(false);

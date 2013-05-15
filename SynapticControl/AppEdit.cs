@@ -27,15 +27,19 @@ namespace SynapticControl
         {
             // This much we know withought messing with the reg
             this.text_appKey.Text = this.appKey;
+            this.Text = "SynapticControl - " + appKey;
 
-            // Try to open the registry key, won't nessicarily exist though
-            RegistryKey appDetails;
-            try
+            // If we are editing the (Default) entry, don't need to to registry lookups. Also, lock the text boxes.
+            if (appKey == Global.DEFAULT_APP_NAME)
             {
-                appDetails = Registry.LocalMachine.OpenSubKey(
-                    Global.REG_APP_EXECUTABLES + @"\" + this.appKey);
+                this.panel_appDetails.Enabled = false;
+                return;
             }
-            catch (ArgumentException) { return; }
+            
+            // Try to open the registry key, won't nessicarily exist though
+            RegistryKey appDetails = Registry.LocalMachine.OpenSubKey(
+                    Global.REG_APP_EXECUTABLES + @"\" + this.appKey);
+            if (appDetails == null) return;
 
             // Populate the text boxes
             foreach (KeyValuePair<string, TextBox> pair in this.fieldMap)
@@ -51,10 +55,28 @@ namespace SynapticControl
             appDetails.Close();
         }
 
+        // Resize the ListView's columns to fill the avaliable space
+        private void resizeColumns()
+        {
+            // Resize the column headers
+            for (int i = 0; i < this.listView_actions.Columns.Count - 1; i++)
+            {
+                ColumnHeader head = this.listView_actions.Columns[i];
+                head.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
+                if (head.Width > this.listView_actions.Width / (this.listView_actions.Columns.Count - 1))
+                {
+                    head.Width = this.listView_actions.Width / (this.listView_actions.Columns.Count - 1);
+                }
+            }
+
+            this.listView_actions.Columns[this.listView_actions.Columns.Count - 1].Width = -2;
+        }
+
         // EVENT HANDLERS
         private void AppEdit_Load(object sender, System.EventArgs e)
         {
             this.populateAppDetails();
+            this.resizeColumns();
         }
     }
 }

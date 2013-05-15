@@ -38,6 +38,9 @@
             this.text_appExe = new System.Windows.Forms.TextBox();
             this.text_appMatchType = new System.Windows.Forms.TextBox();
             this.text_appKey = new System.Windows.Forms.TextBox();
+            this.listView_actions = new System.Windows.Forms.ListView();
+            this.col_gesture = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.col_action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.panel_appEdit.SuspendLayout();
             this.panel_appDetails.SuspendLayout();
             this.SuspendLayout();
@@ -47,12 +50,14 @@
             this.panel_appEdit.ColumnCount = 1;
             this.panel_appEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.panel_appEdit.Controls.Add(this.panel_appDetails, 0, 0);
+            this.panel_appEdit.Controls.Add(this.listView_actions, 0, 1);
             this.panel_appEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_appEdit.Location = new System.Drawing.Point(0, 0);
             this.panel_appEdit.Name = "panel_appEdit";
-            this.panel_appEdit.RowCount = 2;
+            this.panel_appEdit.RowCount = 3;
             this.panel_appEdit.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.panel_appEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.panel_appEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.panel_appEdit.Size = new System.Drawing.Size(661, 587);
             this.panel_appEdit.TabIndex = 0;
             // 
@@ -157,6 +162,30 @@
             this.text_appKey.Size = new System.Drawing.Size(321, 20);
             this.text_appKey.TabIndex = 4;
             // 
+            // listView_actions
+            // 
+            this.listView_actions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.col_gesture,
+            this.col_action});
+            this.listView_actions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView_actions.FullRowSelect = true;
+            this.listView_actions.Location = new System.Drawing.Point(6, 100);
+            this.listView_actions.Margin = new System.Windows.Forms.Padding(6);
+            this.listView_actions.MultiSelect = false;
+            this.listView_actions.Name = "listView_actions";
+            this.listView_actions.Size = new System.Drawing.Size(649, 461);
+            this.listView_actions.TabIndex = 1;
+            this.listView_actions.UseCompatibleStateImageBehavior = false;
+            this.listView_actions.View = System.Windows.Forms.View.Details;
+            // 
+            // col_gesture
+            // 
+            this.col_gesture.Text = "Gesture";
+            // 
+            // col_action
+            // 
+            this.col_action.Text = "Action";
+            // 
             // AppEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -190,5 +219,8 @@
         private System.Windows.Forms.TextBox text_appClassName;
         private System.Windows.Forms.TextBox text_appExe;
         private System.Windows.Forms.TextBox text_appMatchType;
+        private System.Windows.Forms.ListView listView_actions;
+        private System.Windows.Forms.ColumnHeader col_gesture;
+        private System.Windows.Forms.ColumnHeader col_action;
     }
 }
