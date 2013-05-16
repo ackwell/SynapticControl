@@ -7,10 +7,10 @@ namespace SynapticControl
 
         public static string
             REG_APP_EXECUTABLES = SYNAPTICS_ROOT + @"\SynTPEnh\OSD\TouchPad\AppProfiles", // Mappings of app key to app exe/class/etc
-            REG_DEFAULT_ACTIONS = SYNAPTICS_ROOT + @"\SynTP\Defaults\",
+            REG_DEFAULT_ACTIONS = SYNAPTICS_ROOT + @"\SynTP\Defaults\", // Default action mapping
             REG_APP_ACTIONS = REG_DEFAULT_ACTIONS + @"\AppProfiles", // Mappings of app to gesture actions
             REG_ACTIONS = SYNAPTICS_ROOT + @"\SynTPPlugIns\SynTP", // List of gesture actions
-            REG_DEFAULT_MACROS = SYNAPTICS_ROOT + @"\SynTPEnh\PlugInConfig\Defaults", // Application mapping for keyboard macros for action 28
+            REG_DEFAULT_MACROS = SYNAPTICS_ROOT + @"\SynTPEnh\PlugInConfig\Defaults", // Default mapping for keyboard macros for action 28
             REG_APP_MACROS = SYNAPTICS_ROOT + @"\SynTPEnh\PlugInConfig\TouchPad\AppProfiles", // Application mapping for keyboard macros for action 28
 
             DEFAULT_APP_NAME="(Default)",

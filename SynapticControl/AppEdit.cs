@@ -36,7 +36,7 @@ namespace SynapticControl
                 return;
             }
             
-            // Try to open the registry key, won't nessicarily exist though
+            // Try to open the registry key, won't nessicarily exist though (new keys, etc)
             RegistryKey appDetails = Registry.LocalMachine.OpenSubKey(
                     Global.REG_APP_EXECUTABLES + @"\" + this.appKey);
             if (appDetails == null) return;
@@ -57,7 +57,7 @@ namespace SynapticControl
 
         private void saveAppDetails()
         {
-            // Can't edit (Defaukt) details, so ignore.
+            // Can't edit (Default) details, so ignore.
             if (this.appKey == Global.DEFAULT_APP_NAME) return;
 
             // Open the key we are editing, creating it if required
@@ -70,7 +70,8 @@ namespace SynapticControl
             {
                 // Neet to check if the input is not empty here
                 if (pair.Key == "AppMatchType")
-                { 
+                {
+                    if (pair.Value.Text == "") continue;
                     int value = int.Parse(pair.Value.Text);
                     appDetails.SetValue(pair.Key, value, RegistryValueKind.DWord);
                 }

@@ -71,6 +71,15 @@ namespace SynapticControl
             this.listView_apps.Columns[this.listView_apps.Columns.Count - 1].Width = -2;
         }
 
+        private void addNewItem()
+        {
+            string newKey = Microsoft.VisualBasic.Interaction.InputBox(
+                "Please enter an identifier for the new rule (should be unique).",
+                "Add New Application Rule");
+            AppEdit appEditDialog = new AppEdit(newKey);
+            appEditDialog.ShowDialog(this);
+        }
+
         private void editSelectedItem()
         {
             // Make sure an item is selected.
@@ -140,6 +149,11 @@ namespace SynapticControl
         private void btn_remove_Click(object sender, EventArgs e)
         {
             this.removeSelectedItem();
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            this.addNewItem();
         }
     }
 }

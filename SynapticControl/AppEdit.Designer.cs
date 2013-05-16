@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("3 Finger Flicks", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Up");
-            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Down");
-            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Left");
-            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Right");
+            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("3 Finger Flicks", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Up");
+            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Down");
+            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Left");
+            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Right");
             this.panel_appEdit = new System.Windows.Forms.TableLayoutPanel();
             this.panel_appDetails = new System.Windows.Forms.TableLayoutPanel();
             this.label_appKey = new System.Windows.Forms.Label();
@@ -168,6 +168,7 @@
             // 
             this.text_appKey.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.text_appKey.Enabled = false;
             this.text_appKey.Location = new System.Drawing.Point(3, 21);
             this.text_appKey.Name = "text_appKey";
             this.text_appKey.Size = new System.Drawing.Size(208, 20);
@@ -180,24 +181,24 @@
             this.col_action});
             this.listView_actions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView_actions.FullRowSelect = true;
-            listViewGroup1.Header = "3 Finger Flicks";
-            listViewGroup1.Name = "group_3FingerGestures";
-            listViewGroup1.Tag = "3FingerGestures";
+            listViewGroup3.Header = "3 Finger Flicks";
+            listViewGroup3.Name = "group_3FingerGestures";
+            listViewGroup3.Tag = "3FingerGestures";
             this.listView_actions.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup1});
-            listViewItem1.Group = listViewGroup1;
-            listViewItem1.Tag = "ActionID1";
-            listViewItem2.Group = listViewGroup1;
-            listViewItem2.Tag = "ActionID5";
-            listViewItem3.Group = listViewGroup1;
-            listViewItem3.Tag = "ActionID7";
-            listViewItem4.Group = listViewGroup1;
-            listViewItem4.Tag = "ActionID3";
+            listViewGroup3});
+            listViewItem9.Group = listViewGroup3;
+            listViewItem9.Tag = "ActionID1";
+            listViewItem10.Group = listViewGroup3;
+            listViewItem10.Tag = "ActionID5";
+            listViewItem11.Group = listViewGroup3;
+            listViewItem11.Tag = "ActionID7";
+            listViewItem12.Group = listViewGroup3;
+            listViewItem12.Tag = "ActionID3";
             this.listView_actions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem1,
-            listViewItem2,
-            listViewItem3,
-            listViewItem4});
+            listViewItem9,
+            listViewItem10,
+            listViewItem11,
+            listViewItem12});
             this.listView_actions.Location = new System.Drawing.Point(6, 100);
             this.listView_actions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 3);
             this.listView_actions.MultiSelect = false;
@@ -275,7 +276,7 @@
             this.MinimizeBox = false;
             this.Name = "AppEdit";
             this.ShowInTaskbar = false;
-            this.Text = "w";
+            this.Text = "SynapticControl";
             this.Load += new System.EventHandler(this.AppEdit_Load);
             this.ResizeEnd += new System.EventHandler(this.AppEdit_ResizeEnd);
             this.panel_appEdit.ResumeLayout(false);
