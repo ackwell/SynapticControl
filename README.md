@@ -1,5 +1,5 @@
-SublimeControl
-==============
+SynapticControl
+===============
 
 Take back control of your touchpad!
 
