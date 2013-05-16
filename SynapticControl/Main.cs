@@ -49,6 +49,13 @@ namespace SynapticControl
             return item;
         }
 
+        private void refreshData()
+        {
+            this.listView_apps.Items.Clear();
+            this.populateData();
+            this.resizeColumns();
+        }
+
         // Resize the ListView's columns to fill the avaliable space
         private void resizeColumns()
         {
@@ -78,6 +85,7 @@ namespace SynapticControl
                 "Add New Application Rule");
             AppEdit appEditDialog = new AppEdit(newKey);
             appEditDialog.ShowDialog(this);
+            this.refreshData();
         }
 
         private void editSelectedItem()
@@ -90,6 +98,7 @@ namespace SynapticControl
 
             AppEdit appEditDialog = new AppEdit(toEdit.Text);
             appEditDialog.ShowDialog(this);
+            this.refreshData();
         }
 
         private void removeSelectedItem()
