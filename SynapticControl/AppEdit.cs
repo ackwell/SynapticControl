@@ -77,14 +77,7 @@ namespace SynapticControl
                     {
                         // Work out the action name from the actions reg
                         RegistryKey actionDetails = actions.OpenSubKey(actionID.ToString());
-                        if (actionDetails == null)
-                        {
-                            actionName = "(Invalid)";
-                        }
-                        else
-                        {
-                            actionName = (string)actionDetails.GetValue("ShortName");
-                        }
+                        actionName = actionDetails==null? "(Invalid)" : (string)actionDetails.GetValue("ShortName");
                     }
 
                     // Make sure there is a second subitem, etc etc etc
