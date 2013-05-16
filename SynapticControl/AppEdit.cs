@@ -94,6 +94,17 @@ namespace SynapticControl
             actions.Close();
         }
 
+        private void editSelectedItem()
+        {
+            // If nothing selected (when clicking Edit button), ignore.
+            if (this.listView_actions.SelectedItems.Count == 0) return;
+
+            ListViewItem toEdit = this.listView_actions.SelectedItems[0];
+
+            ActionEdit actionEditDialog = new ActionEdit(this.appKey, (string)toEdit.Group.Tag, (string)toEdit.Tag);
+            actionEditDialog.ShowDialog(this);
+        }
+
         // Resize the ListView's columns to fill the avaliable space
         private void resizeColumns()
         {
@@ -111,6 +122,16 @@ namespace SynapticControl
         private void AppEdit_ResizeEnd(object sender, EventArgs e)
         {
             this.resizeColumns();
+        }
+
+        private void button_edit_Click(object sender, EventArgs e)
+        {
+            this.editSelectedItem();
+        }
+
+        private void listView_actions_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.editSelectedItem();
         }
     }
 }

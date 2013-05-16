@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("3 Finger Flicks", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Up");
-            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Down");
-            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Left");
-            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Right");
+            System.Windows.Forms.ListViewGroup listViewGroup1 = new System.Windows.Forms.ListViewGroup("3 Finger Flicks", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem1 = new System.Windows.Forms.ListViewItem("Up");
+            System.Windows.Forms.ListViewItem listViewItem2 = new System.Windows.Forms.ListViewItem("Down");
+            System.Windows.Forms.ListViewItem listViewItem3 = new System.Windows.Forms.ListViewItem("Left");
+            System.Windows.Forms.ListViewItem listViewItem4 = new System.Windows.Forms.ListViewItem("Right");
             this.panel_appEdit = new System.Windows.Forms.TableLayoutPanel();
             this.panel_appDetails = new System.Windows.Forms.TableLayoutPanel();
             this.label_appKey = new System.Windows.Forms.Label();
@@ -43,11 +43,16 @@
             this.text_appExe = new System.Windows.Forms.TextBox();
             this.text_appMatchType = new System.Windows.Forms.TextBox();
             this.text_appKey = new System.Windows.Forms.TextBox();
-            this.listView_actions = new System.Windows.Forms.ListView();
             this.col_gesture = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.listView_actions = new System.Windows.Forms.ListView();
+            this.panel_buttons = new System.Windows.Forms.Panel();
+            this.button_edit = new System.Windows.Forms.Button();
+            this.button2 = new System.Windows.Forms.Button();
+            this.button3 = new System.Windows.Forms.Button();
             this.panel_appEdit.SuspendLayout();
             this.panel_appDetails.SuspendLayout();
+            this.panel_buttons.SuspendLayout();
             this.SuspendLayout();
             // 
             // panel_appEdit
@@ -56,14 +61,15 @@
             this.panel_appEdit.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.panel_appEdit.Controls.Add(this.panel_appDetails, 0, 0);
             this.panel_appEdit.Controls.Add(this.listView_actions, 0, 1);
+            this.panel_appEdit.Controls.Add(this.panel_buttons, 0, 2);
             this.panel_appEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_appEdit.Location = new System.Drawing.Point(0, 0);
             this.panel_appEdit.Name = "panel_appEdit";
             this.panel_appEdit.RowCount = 3;
             this.panel_appEdit.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.panel_appEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.panel_appEdit.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.panel_appEdit.Size = new System.Drawing.Size(661, 587);
+            this.panel_appEdit.RowStyles.Add(new System.Windows.Forms.RowStyle());
+            this.panel_appEdit.Size = new System.Drawing.Size(434, 511);
             this.panel_appEdit.TabIndex = 0;
             // 
             // panel_appDetails
@@ -88,7 +94,7 @@
             this.panel_appDetails.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.panel_appDetails.RowStyles.Add(new System.Windows.Forms.RowStyle());
             this.panel_appDetails.RowStyles.Add(new System.Windows.Forms.RowStyle());
-            this.panel_appDetails.Size = new System.Drawing.Size(655, 88);
+            this.panel_appDetails.Size = new System.Drawing.Size(428, 88);
             this.panel_appDetails.TabIndex = 0;
             // 
             // label_appKey
@@ -167,40 +173,6 @@
             this.text_appKey.Size = new System.Drawing.Size(321, 20);
             this.text_appKey.TabIndex = 4;
             // 
-            // listView_actions
-            // 
-            this.listView_actions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.col_gesture,
-            this.col_action});
-            this.listView_actions.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.listView_actions.FullRowSelect = true;
-            listViewGroup4.Header = "3 Finger Flicks";
-            listViewGroup4.Name = "group_3FingerGestures";
-            listViewGroup4.Tag = "3FingerGestures";
-            this.listView_actions.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup4});
-            listViewItem13.Group = listViewGroup4;
-            listViewItem13.Tag = "ActionID1";
-            listViewItem14.Group = listViewGroup4;
-            listViewItem14.Tag = "ActionID5";
-            listViewItem15.Group = listViewGroup4;
-            listViewItem15.Tag = "ActionID7";
-            listViewItem16.Group = listViewGroup4;
-            listViewItem16.Tag = "ActionID3";
-            this.listView_actions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem13,
-            listViewItem14,
-            listViewItem15,
-            listViewItem16});
-            this.listView_actions.Location = new System.Drawing.Point(6, 100);
-            this.listView_actions.Margin = new System.Windows.Forms.Padding(6);
-            this.listView_actions.MultiSelect = false;
-            this.listView_actions.Name = "listView_actions";
-            this.listView_actions.Size = new System.Drawing.Size(649, 461);
-            this.listView_actions.TabIndex = 1;
-            this.listView_actions.UseCompatibleStateImageBehavior = false;
-            this.listView_actions.View = System.Windows.Forms.View.Details;
-            // 
             // col_gesture
             // 
             this.col_gesture.Text = "Gesture";
@@ -211,12 +183,91 @@
             this.col_action.Text = "Action";
             this.col_action.Width = 100;
             // 
+            // listView_actions
+            // 
+            this.listView_actions.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.col_gesture,
+            this.col_action});
+            this.listView_actions.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.listView_actions.FullRowSelect = true;
+            listViewGroup1.Header = "3 Finger Flicks";
+            listViewGroup1.Name = "group_3FingerGestures";
+            listViewGroup1.Tag = "3FingerGestures";
+            this.listView_actions.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup1});
+            listViewItem1.Group = listViewGroup1;
+            listViewItem1.Tag = "ActionID1";
+            listViewItem2.Group = listViewGroup1;
+            listViewItem2.Tag = "ActionID5";
+            listViewItem3.Group = listViewGroup1;
+            listViewItem3.Tag = "ActionID7";
+            listViewItem4.Group = listViewGroup1;
+            listViewItem4.Tag = "ActionID3";
+            this.listView_actions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem1,
+            listViewItem2,
+            listViewItem3,
+            listViewItem4});
+            this.listView_actions.Location = new System.Drawing.Point(6, 100);
+            this.listView_actions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 3);
+            this.listView_actions.MultiSelect = false;
+            this.listView_actions.Name = "listView_actions";
+            this.listView_actions.Size = new System.Drawing.Size(422, 378);
+            this.listView_actions.TabIndex = 1;
+            this.listView_actions.UseCompatibleStateImageBehavior = false;
+            this.listView_actions.View = System.Windows.Forms.View.Details;
+            this.listView_actions.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_actions_MouseDoubleClick);
+            // 
+            // panel_buttons
+            // 
+            this.panel_buttons.Controls.Add(this.button3);
+            this.panel_buttons.Controls.Add(this.button2);
+            this.panel_buttons.Controls.Add(this.button_edit);
+            this.panel_buttons.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.panel_buttons.Location = new System.Drawing.Point(0, 481);
+            this.panel_buttons.Margin = new System.Windows.Forms.Padding(0);
+            this.panel_buttons.Name = "panel_buttons";
+            this.panel_buttons.Padding = new System.Windows.Forms.Padding(5, 0, 5, 5);
+            this.panel_buttons.Size = new System.Drawing.Size(434, 30);
+            this.panel_buttons.TabIndex = 2;
+            // 
+            // button_edit
+            // 
+            this.button_edit.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button_edit.Location = new System.Drawing.Point(5, 0);
+            this.button_edit.Name = "button_edit";
+            this.button_edit.Size = new System.Drawing.Size(75, 25);
+            this.button_edit.TabIndex = 0;
+            this.button_edit.Text = "Edit";
+            this.button_edit.UseVisualStyleBackColor = true;
+            this.button_edit.Click += new System.EventHandler(this.button_edit_Click);
+            // 
+            // button2
+            // 
+            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button2.Location = new System.Drawing.Point(354, 0);
+            this.button2.Name = "button2";
+            this.button2.Size = new System.Drawing.Size(75, 25);
+            this.button2.TabIndex = 1;
+            this.button2.Text = "button2";
+            this.button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button3.Location = new System.Drawing.Point(279, 0);
+            this.button3.Name = "button3";
+            this.button3.Size = new System.Drawing.Size(75, 25);
+            this.button3.TabIndex = 2;
+            this.button3.Text = "button3";
+            this.button3.UseVisualStyleBackColor = true;
+            // 
             // AppEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Window;
-            this.ClientSize = new System.Drawing.Size(661, 587);
+            this.ClientSize = new System.Drawing.Size(434, 511);
             this.Controls.Add(this.panel_appEdit);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -229,6 +280,7 @@
             this.panel_appEdit.PerformLayout();
             this.panel_appDetails.ResumeLayout(false);
             this.panel_appDetails.PerformLayout();
+            this.panel_buttons.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -248,5 +300,9 @@
         private System.Windows.Forms.ListView listView_actions;
         private System.Windows.Forms.ColumnHeader col_gesture;
         private System.Windows.Forms.ColumnHeader col_action;
+        private System.Windows.Forms.Panel panel_buttons;
+        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_edit;
     }
 }
