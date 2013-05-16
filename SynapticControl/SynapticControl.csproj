@@ -73,6 +73,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="ActionEdit.resx">
+      <DependentUpon>ActionEdit.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="AppEdit.resx">
       <DependentUpon>AppEdit.cs</DependentUpon>
     </EmbeddedResource>

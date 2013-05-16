@@ -43,13 +43,13 @@
             this.text_appExe = new System.Windows.Forms.TextBox();
             this.text_appMatchType = new System.Windows.Forms.TextBox();
             this.text_appKey = new System.Windows.Forms.TextBox();
+            this.listView_actions = new System.Windows.Forms.ListView();
             this.col_gesture = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.col_action = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.listView_actions = new System.Windows.Forms.ListView();
             this.panel_buttons = new System.Windows.Forms.Panel();
+            this.button_ok = new System.Windows.Forms.Button();
+            this.button_cancel = new System.Windows.Forms.Button();
             this.button_edit = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
             this.panel_appEdit.SuspendLayout();
             this.panel_appDetails.SuspendLayout();
             this.panel_buttons.SuspendLayout();
@@ -110,7 +110,7 @@
             // label_appExe
             // 
             this.label_appExe.AutoSize = true;
-            this.label_appExe.Location = new System.Drawing.Point(330, 5);
+            this.label_appExe.Location = new System.Drawing.Point(217, 5);
             this.label_appExe.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label_appExe.Name = "label_appExe";
             this.label_appExe.Size = new System.Drawing.Size(60, 13);
@@ -120,7 +120,7 @@
             // label_appMatchType
             // 
             this.label_appMatchType.AutoSize = true;
-            this.label_appMatchType.Location = new System.Drawing.Point(330, 49);
+            this.label_appMatchType.Location = new System.Drawing.Point(217, 49);
             this.label_appMatchType.Margin = new System.Windows.Forms.Padding(3, 5, 3, 0);
             this.label_appMatchType.Name = "label_appMatchType";
             this.label_appMatchType.Size = new System.Drawing.Size(80, 13);
@@ -143,25 +143,25 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.text_appClassName.Location = new System.Drawing.Point(3, 65);
             this.text_appClassName.Name = "text_appClassName";
-            this.text_appClassName.Size = new System.Drawing.Size(321, 20);
+            this.text_appClassName.Size = new System.Drawing.Size(208, 20);
             this.text_appClassName.TabIndex = 5;
             // 
             // text_appExe
             // 
             this.text_appExe.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.text_appExe.Location = new System.Drawing.Point(330, 21);
+            this.text_appExe.Location = new System.Drawing.Point(217, 21);
             this.text_appExe.Name = "text_appExe";
-            this.text_appExe.Size = new System.Drawing.Size(322, 20);
+            this.text_appExe.Size = new System.Drawing.Size(208, 20);
             this.text_appExe.TabIndex = 6;
             // 
             // text_appMatchType
             // 
             this.text_appMatchType.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.text_appMatchType.Location = new System.Drawing.Point(330, 65);
+            this.text_appMatchType.Location = new System.Drawing.Point(217, 65);
             this.text_appMatchType.Name = "text_appMatchType";
-            this.text_appMatchType.Size = new System.Drawing.Size(322, 20);
+            this.text_appMatchType.Size = new System.Drawing.Size(208, 20);
             this.text_appMatchType.TabIndex = 7;
             // 
             // text_appKey
@@ -170,18 +170,8 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.text_appKey.Location = new System.Drawing.Point(3, 21);
             this.text_appKey.Name = "text_appKey";
-            this.text_appKey.Size = new System.Drawing.Size(321, 20);
+            this.text_appKey.Size = new System.Drawing.Size(208, 20);
             this.text_appKey.TabIndex = 4;
-            // 
-            // col_gesture
-            // 
-            this.col_gesture.Text = "Gesture";
-            this.col_gesture.Width = 150;
-            // 
-            // col_action
-            // 
-            this.col_action.Text = "Action";
-            this.col_action.Width = 100;
             // 
             // listView_actions
             // 
@@ -218,10 +208,20 @@
             this.listView_actions.View = System.Windows.Forms.View.Details;
             this.listView_actions.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.listView_actions_MouseDoubleClick);
             // 
+            // col_gesture
+            // 
+            this.col_gesture.Text = "Gesture";
+            this.col_gesture.Width = 150;
+            // 
+            // col_action
+            // 
+            this.col_action.Text = "Action";
+            this.col_action.Width = 100;
+            // 
             // panel_buttons
             // 
-            this.panel_buttons.Controls.Add(this.button3);
-            this.panel_buttons.Controls.Add(this.button2);
+            this.panel_buttons.Controls.Add(this.button_ok);
+            this.panel_buttons.Controls.Add(this.button_cancel);
             this.panel_buttons.Controls.Add(this.button_edit);
             this.panel_buttons.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel_buttons.Location = new System.Drawing.Point(0, 481);
@@ -230,6 +230,28 @@
             this.panel_buttons.Padding = new System.Windows.Forms.Padding(5, 0, 5, 5);
             this.panel_buttons.Size = new System.Drawing.Size(434, 30);
             this.panel_buttons.TabIndex = 2;
+            // 
+            // button_ok
+            // 
+            this.button_ok.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button_ok.Location = new System.Drawing.Point(279, 0);
+            this.button_ok.Name = "button_ok";
+            this.button_ok.Size = new System.Drawing.Size(75, 25);
+            this.button_ok.TabIndex = 2;
+            this.button_ok.Text = "OK";
+            this.button_ok.UseVisualStyleBackColor = true;
+            this.button_ok.Click += new System.EventHandler(this.button_ok_Click);
+            // 
+            // button_cancel
+            // 
+            this.button_cancel.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button_cancel.Location = new System.Drawing.Point(354, 0);
+            this.button_cancel.Name = "button_cancel";
+            this.button_cancel.Size = new System.Drawing.Size(75, 25);
+            this.button_cancel.TabIndex = 1;
+            this.button_cancel.Text = "Cancel";
+            this.button_cancel.UseVisualStyleBackColor = true;
+            this.button_cancel.Click += new System.EventHandler(this.button_cancel_Click);
             // 
             // button_edit
             // 
@@ -242,26 +264,6 @@
             this.button_edit.UseVisualStyleBackColor = true;
             this.button_edit.Click += new System.EventHandler(this.button_edit_Click);
             // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button2.Location = new System.Drawing.Point(354, 0);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 25);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button3.Location = new System.Drawing.Point(279, 0);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 25);
-            this.button3.TabIndex = 2;
-            this.button3.Text = "button3";
-            this.button3.UseVisualStyleBackColor = true;
-            // 
             // AppEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,7 +275,7 @@
             this.MinimizeBox = false;
             this.Name = "AppEdit";
             this.ShowInTaskbar = false;
-            this.Text = "SynapticControl";
+            this.Text = "w";
             this.Load += new System.EventHandler(this.AppEdit_Load);
             this.ResizeEnd += new System.EventHandler(this.AppEdit_ResizeEnd);
             this.panel_appEdit.ResumeLayout(false);
@@ -301,8 +303,8 @@
         private System.Windows.Forms.ColumnHeader col_gesture;
         private System.Windows.Forms.ColumnHeader col_action;
         private System.Windows.Forms.Panel panel_buttons;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button button_ok;
+        private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.Button button_edit;
     }
 }

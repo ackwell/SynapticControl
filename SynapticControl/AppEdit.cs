@@ -27,10 +27,10 @@ namespace SynapticControl
         {
             // This much we know withought messing with the reg
             this.text_appKey.Text = this.appKey;
-            this.Text = "SynapticControl - " + appKey;
+            this.Text = "SynapticControl - " + this.appKey;
 
             // If we are editing the (Default) entry, don't need to to registry lookups. Also, lock the text boxes.
-            if (appKey == Global.DEFAULT_APP_NAME)
+            if (this.appKey == Global.DEFAULT_APP_NAME)
             {
                 this.panel_appDetails.Enabled = false;
                 return;
@@ -55,43 +55,69 @@ namespace SynapticControl
             appDetails.Close();
         }
 
+        private void saveAppDetails()
+        {
+            // Can't edit (Defaukt) details, so ignore.
+            if (this.appKey == Global.DEFAULT_APP_NAME) return;
+
+            // Open the key we are editing, creating it if required
+            RegistryKey appDetails = Registry.LocalMachine.CreateSubKey(
+                Global.REG_APP_EXECUTABLES + @"\" + this.appKey);
+
+            // Read data out of the text boxes, into the app details reg key
+            // NEED TO VALIDATE APPMATCHTYPE
+            foreach (KeyValuePair<string, TextBox> pair in this.fieldMap)
+            {
+                // Neet to check if the input is not empty here
+                if (pair.Key == "AppMatchType")
+                { 
+                    int value = int.Parse(pair.Value.Text);
+                    appDetails.SetValue(pair.Key, value, RegistryValueKind.DWord);
+                }
+                else
+                {
+                    string value = pair.Value.Text;
+                    appDetails.SetValue(pair.Key, value, RegistryValueKind.String);
+                }
+            }
+            appDetails.Close();
+        }
+
         private void populateActionDetails()
         {
-            // Open up the action listing so we can grab data (names) from it.
-            RegistryKey actions = Registry.LocalMachine.OpenSubKey(Global.REG_ACTIONS);
+            // We'll want to grab (Default) actions from the Defaults subkey (Duh).
+            string basePath = (this.appKey==Global.DEFAULT_APP_NAME?
+                Global.REG_DEFAULT_ACTIONS :
+                Global.REG_APP_ACTIONS + @"\" + this.appKey);
 
-            // Loop over the groups, grab the reg key name etc
             foreach (ListViewGroup group in this.listView_actions.Groups)
             {
-                string regPath = Global.REG_APP_ACTIONS + @"\" + this.appKey + @"\" + group.Tag;
-                // Try to open the key. If it doesn't exist, create it. (handled by the api)
-                RegistryKey appActions = Registry.LocalMachine.CreateSubKey(regPath);
+                // Try to open up the gesture subkey. If it doesn't exist, ignore. ActionEdit will handle it.
+                RegistryKey appGestureActions = Registry.LocalMachine.OpenSubKey(basePath + @"\" + (string)group.Tag);
+                if (appGestureActions == null) continue;
 
-                // Loop over the list items in the group, grab reg value if it's set and stuff
+                // Load up the individual actions
                 foreach (ListViewItem item in group.Items)
                 {
-                    string actionKey = (string)item.Tag;
-                    int? actionID = (int?)appActions.GetValue(actionKey);
-                    string actionName = "(None)"; // Default (used when null)
-                    if (actionID != null)
-                    {
-                        // Work out the action name from the actions reg
-                        RegistryKey actionDetails = actions.OpenSubKey(actionID.ToString());
-                        actionName = actionDetails==null? "(Invalid)" : (string)actionDetails.GetValue("ShortName");
-                    }
-
-                    // Make sure there is a second subitem, etc etc etc
+                    // Make sure the ListItems all have the two SubItems, set default text
                     if (item.SubItems.Count == 1)
                     {
                         item.SubItems.Add(new ListViewItem.ListViewSubItem());
                     }
-                    item.SubItems[1].Text = actionName;
+                    item.SubItems[1].Text = this.appKey==Global.DEFAULT_APP_NAME?"(None)":"(Inherit)";
+
+                    // Get the ActionID. If it's null, got nothin' to do here.
+                    int? actionID = (int?)appGestureActions.GetValue((string)item.Tag);
+                    if (actionID == null) continue;
+
+                    // Now use the ID to get the pretty name~
+                    RegistryKey actionDetails = Registry.LocalMachine.OpenSubKey(Global.REG_ACTIONS + @"\" + actionID.ToString());
+                    item.SubItems[1].Text = actionDetails == null ? "(Invalid)" : (string)actionDetails.GetValue("ShortName");
+                    actionDetails.Close();
                 }
 
-                appActions.Close();
+                appGestureActions.Close();
             }
-
-            actions.Close();
         }
 
         private void editSelectedItem()
@@ -132,6 +158,17 @@ namespace SynapticControl
         private void listView_actions_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             this.editSelectedItem();
+        }
+
+        private void button_cancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void button_ok_Click(object sender, EventArgs e)
+        {
+            this.saveAppDetails();
+            this.Close();
         }
     }
 }
