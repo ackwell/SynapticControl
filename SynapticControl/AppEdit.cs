@@ -55,27 +55,68 @@ namespace SynapticControl
             appDetails.Close();
         }
 
+        private void populateActionDetails()
+        {
+            // Open up the action listing so we can grab data (names) from it.
+            RegistryKey actions = Registry.LocalMachine.OpenSubKey(Global.REG_ACTIONS);
+
+            // Loop over the groups, grab the reg key name etc
+            foreach (ListViewGroup group in this.listView_actions.Groups)
+            {
+                string regPath = Global.REG_APP_ACTIONS + @"\" + this.appKey + @"\" + group.Tag;
+                // Try to open the key. If it doesn't exist, create it. (handled by the api)
+                RegistryKey appActions = Registry.LocalMachine.CreateSubKey(regPath);
+
+                // Loop over the list items in the group, grab reg value if it's set and stuff
+                foreach (ListViewItem item in group.Items)
+                {
+                    string actionKey = (string)item.Tag;
+                    int? actionID = (int?)appActions.GetValue(actionKey);
+                    string actionName = "(None)"; // Default (used when null)
+                    if (actionID != null)
+                    {
+                        // Work out the action name from the actions reg
+                        RegistryKey actionDetails = actions.OpenSubKey(actionID.ToString());
+                        if (actionDetails == null)
+                        {
+                            actionName = "(Invalid)";
+                        }
+                        else
+                        {
+                            actionName = (string)actionDetails.GetValue("ShortName");
+                        }
+                    }
+
+                    // Make sure there is a second subitem, etc etc etc
+                    if (item.SubItems.Count == 1)
+                    {
+                        item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                    }
+                    item.SubItems[1].Text = actionName;
+                }
+
+                appActions.Close();
+            }
+
+            actions.Close();
+        }
+
         // Resize the ListView's columns to fill the avaliable space
         private void resizeColumns()
         {
-            // Resize the column headers
-            for (int i = 0; i < this.listView_actions.Columns.Count - 1; i++)
-            {
-                ColumnHeader head = this.listView_actions.Columns[i];
-                head.AutoResize(ColumnHeaderAutoResizeStyle.ColumnContent);
-                if (head.Width > this.listView_actions.Width / (this.listView_actions.Columns.Count - 1))
-                {
-                    head.Width = this.listView_actions.Width / (this.listView_actions.Columns.Count - 1);
-                }
-            }
-
             this.listView_actions.Columns[this.listView_actions.Columns.Count - 1].Width = -2;
         }
 
         // EVENT HANDLERS
-        private void AppEdit_Load(object sender, System.EventArgs e)
+        private void AppEdit_Load(object sender, EventArgs e)
         {
             this.populateAppDetails();
+            this.populateActionDetails();
+            this.resizeColumns();
+        }
+
+        private void AppEdit_ResizeEnd(object sender, EventArgs e)
+        {
             this.resizeColumns();
         }
     }

@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.ListViewGroup listViewGroup4 = new System.Windows.Forms.ListViewGroup("3 Finger Flicks", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem13 = new System.Windows.Forms.ListViewItem("Up");
+            System.Windows.Forms.ListViewItem listViewItem14 = new System.Windows.Forms.ListViewItem("Down");
+            System.Windows.Forms.ListViewItem listViewItem15 = new System.Windows.Forms.ListViewItem("Left");
+            System.Windows.Forms.ListViewItem listViewItem16 = new System.Windows.Forms.ListViewItem("Right");
             this.panel_appEdit = new System.Windows.Forms.TableLayoutPanel();
             this.panel_appDetails = new System.Windows.Forms.TableLayoutPanel();
             this.label_appKey = new System.Windows.Forms.Label();
@@ -169,6 +174,24 @@
             this.col_action});
             this.listView_actions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView_actions.FullRowSelect = true;
+            listViewGroup4.Header = "3 Finger Flicks";
+            listViewGroup4.Name = "group_3FingerGestures";
+            listViewGroup4.Tag = "3FingerGestures";
+            this.listView_actions.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
+            listViewGroup4});
+            listViewItem13.Group = listViewGroup4;
+            listViewItem13.Tag = "ActionID1";
+            listViewItem14.Group = listViewGroup4;
+            listViewItem14.Tag = "ActionID5";
+            listViewItem15.Group = listViewGroup4;
+            listViewItem15.Tag = "ActionID7";
+            listViewItem16.Group = listViewGroup4;
+            listViewItem16.Tag = "ActionID3";
+            this.listView_actions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
+            listViewItem13,
+            listViewItem14,
+            listViewItem15,
+            listViewItem16});
             this.listView_actions.Location = new System.Drawing.Point(6, 100);
             this.listView_actions.Margin = new System.Windows.Forms.Padding(6);
             this.listView_actions.MultiSelect = false;
@@ -181,10 +204,12 @@
             // col_gesture
             // 
             this.col_gesture.Text = "Gesture";
+            this.col_gesture.Width = 150;
             // 
             // col_action
             // 
             this.col_action.Text = "Action";
+            this.col_action.Width = 100;
             // 
             // AppEdit
             // 
@@ -199,6 +224,7 @@
             this.ShowInTaskbar = false;
             this.Text = "SynapticControl";
             this.Load += new System.EventHandler(this.AppEdit_Load);
+            this.ResizeEnd += new System.EventHandler(this.AppEdit_ResizeEnd);
             this.panel_appEdit.ResumeLayout(false);
             this.panel_appEdit.PerformLayout();
             this.panel_appDetails.ResumeLayout(false);
