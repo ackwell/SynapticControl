@@ -69,10 +69,16 @@ namespace SynapticControl
             // NEED TO VALIDATE APPMATCHTYPE
             foreach (KeyValuePair<string, TextBox> pair in this.fieldMap)
             {
-                // Neet to check if the input is not empty here
+                // If it's empty, delete the key (if it exists)
+                if (pair.Value.Text == "")
+                {
+                    appDetails.DeleteValue(pair.Key, false);
+                    continue;
+                }
+
+                // Save the values
                 if (pair.Key == "AppMatchType")
                 {
-                    if (pair.Value.Text == "") continue;
                     int value;
                     if (!int.TryParse(pair.Value.Text, out value)) continue;
                     appDetails.SetValue(pair.Key, value, RegistryValueKind.DWord);
