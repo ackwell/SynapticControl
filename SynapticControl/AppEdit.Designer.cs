@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.ListViewGroup listViewGroup3 = new System.Windows.Forms.ListViewGroup("3 Finger Flicks", System.Windows.Forms.HorizontalAlignment.Left);
-            System.Windows.Forms.ListViewItem listViewItem9 = new System.Windows.Forms.ListViewItem("Up");
-            System.Windows.Forms.ListViewItem listViewItem10 = new System.Windows.Forms.ListViewItem("Down");
-            System.Windows.Forms.ListViewItem listViewItem11 = new System.Windows.Forms.ListViewItem("Left");
-            System.Windows.Forms.ListViewItem listViewItem12 = new System.Windows.Forms.ListViewItem("Right");
+            System.Windows.Forms.ListViewGroup listViewGroup5 = new System.Windows.Forms.ListViewGroup("3 Finger Flicks", System.Windows.Forms.HorizontalAlignment.Left);
+            System.Windows.Forms.ListViewItem listViewItem17 = new System.Windows.Forms.ListViewItem("Up");
+            System.Windows.Forms.ListViewItem listViewItem18 = new System.Windows.Forms.ListViewItem("Down");
+            System.Windows.Forms.ListViewItem listViewItem19 = new System.Windows.Forms.ListViewItem("Left");
+            System.Windows.Forms.ListViewItem listViewItem20 = new System.Windows.Forms.ListViewItem("Right");
             this.panel_appEdit = new System.Windows.Forms.TableLayoutPanel();
             this.panel_appDetails = new System.Windows.Forms.TableLayoutPanel();
             this.label_appKey = new System.Windows.Forms.Label();
@@ -163,6 +163,7 @@
             this.text_appMatchType.Name = "text_appMatchType";
             this.text_appMatchType.Size = new System.Drawing.Size(208, 20);
             this.text_appMatchType.TabIndex = 7;
+            this.text_appMatchType.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.text_appMatchType_KeyPress);
             // 
             // text_appKey
             // 
@@ -181,24 +182,24 @@
             this.col_action});
             this.listView_actions.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listView_actions.FullRowSelect = true;
-            listViewGroup3.Header = "3 Finger Flicks";
-            listViewGroup3.Name = "group_3FingerGestures";
-            listViewGroup3.Tag = "3FingerGestures";
+            listViewGroup5.Header = "3 Finger Flicks";
+            listViewGroup5.Name = "group_3FingerGestures";
+            listViewGroup5.Tag = "3FingerGestures";
             this.listView_actions.Groups.AddRange(new System.Windows.Forms.ListViewGroup[] {
-            listViewGroup3});
-            listViewItem9.Group = listViewGroup3;
-            listViewItem9.Tag = "ActionID1";
-            listViewItem10.Group = listViewGroup3;
-            listViewItem10.Tag = "ActionID5";
-            listViewItem11.Group = listViewGroup3;
-            listViewItem11.Tag = "ActionID7";
-            listViewItem12.Group = listViewGroup3;
-            listViewItem12.Tag = "ActionID3";
+            listViewGroup5});
+            listViewItem17.Group = listViewGroup5;
+            listViewItem17.Tag = "ActionID1";
+            listViewItem18.Group = listViewGroup5;
+            listViewItem18.Tag = "ActionID5";
+            listViewItem19.Group = listViewGroup5;
+            listViewItem19.Tag = "ActionID7";
+            listViewItem20.Group = listViewGroup5;
+            listViewItem20.Tag = "ActionID3";
             this.listView_actions.Items.AddRange(new System.Windows.Forms.ListViewItem[] {
-            listViewItem9,
-            listViewItem10,
-            listViewItem11,
-            listViewItem12});
+            listViewItem17,
+            listViewItem18,
+            listViewItem19,
+            listViewItem20});
             this.listView_actions.Location = new System.Drawing.Point(6, 100);
             this.listView_actions.Margin = new System.Windows.Forms.Padding(6, 6, 6, 3);
             this.listView_actions.MultiSelect = false;
@@ -299,7 +300,6 @@
         private System.Windows.Forms.TextBox text_appKey;
         private System.Windows.Forms.TextBox text_appClassName;
         private System.Windows.Forms.TextBox text_appExe;
-        private System.Windows.Forms.TextBox text_appMatchType;
         private System.Windows.Forms.ListView listView_actions;
         private System.Windows.Forms.ColumnHeader col_gesture;
         private System.Windows.Forms.ColumnHeader col_action;
@@ -307,5 +307,6 @@
         private System.Windows.Forms.Button button_ok;
         private System.Windows.Forms.Button button_cancel;
         private System.Windows.Forms.Button button_edit;
+        private System.Windows.Forms.TextBox text_appMatchType;
     }
 }

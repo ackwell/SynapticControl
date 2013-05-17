@@ -1,7 +1,7 @@
 ﻿using Microsoft.Win32;
 using System;
-using System.Windows.Forms;
 using System.Collections.Generic;
+using System.Windows.Forms;
 
 namespace SynapticControl
 {
@@ -45,10 +45,10 @@ namespace SynapticControl
             foreach (KeyValuePair<string, TextBox> pair in this.fieldMap)
             {
                 // Retrieve value if it's there
-                string value = (string)appDetails.GetValue(pair.Key);
+                object value = appDetails.GetValue(pair.Key);
                 if (value != null)
                 {
-                    pair.Value.Text = value;
+                    pair.Value.Text = value.ToString();
                 }
             }
 
@@ -57,6 +57,7 @@ namespace SynapticControl
 
         private void saveAppDetails()
         {
+            // NEEDS TO DELETE EMPTY FIELDS
             // Can't edit (Default) details, so ignore.
             if (this.appKey == Global.DEFAULT_APP_NAME) return;
 
@@ -72,7 +73,8 @@ namespace SynapticControl
                 if (pair.Key == "AppMatchType")
                 {
                     if (pair.Value.Text == "") continue;
-                    int value = int.Parse(pair.Value.Text);
+                    int value;
+                    if (!int.TryParse(pair.Value.Text, out value)) continue;
                     appDetails.SetValue(pair.Key, value, RegistryValueKind.DWord);
                 }
                 else
@@ -105,7 +107,7 @@ namespace SynapticControl
                     {
                         item.SubItems.Add(new ListViewItem.ListViewSubItem());
                     }
-                    item.SubItems[1].Text = this.appKey==Global.DEFAULT_APP_NAME?"(None)":"(Inherit)";
+                    item.SubItems[1].Text = this.appKey==Global.DEFAULT_APP_NAME?"(None)":"(Inherited)";
 
                     // Get the ActionID. If it's null, got nothin' to do here.
                     int? actionID = (int?)appGestureActions.GetValue((string)item.Tag);
@@ -170,6 +172,16 @@ namespace SynapticControl
         {
             this.saveAppDetails();
             this.Close();
+        }
+
+        // Numbers only folks
+        private void text_appMatchType_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) &&
+                !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
         }
     }
 }
