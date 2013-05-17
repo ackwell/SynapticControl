@@ -102,7 +102,7 @@ namespace SynapticControl
             foreach (ListViewGroup group in this.listView_actions.Groups)
             {
                 // Try to open up the gesture subkey. If it doesn't exist, ignore. ActionEdit will handle it.
-                using (RegistryKey appGestureActions = Registry.LocalMachine.OpenSubKey(basePath + @"\" + (string)group.Tag)
+                using (RegistryKey appGestureActions = Registry.LocalMachine.OpenSubKey(basePath + @"\" + (string)group.Tag))
                 {
                     if (appGestureActions == null) continue;
 
@@ -139,6 +139,9 @@ namespace SynapticControl
 
             ActionEdit actionEditDialog = new ActionEdit(this.appKey, (string)toEdit.Group.Tag, (string)toEdit.Tag);
             actionEditDialog.ShowDialog(this);
+
+            // Refresh the action data
+            this.populateActionDetails();
         }
 
         // Resize the ListView's columns to fill the avaliable space
