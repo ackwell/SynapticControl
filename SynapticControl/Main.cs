@@ -19,21 +19,22 @@ namespace SynapticControl
             this.listView_apps.Items.Add(this.createListViewItem(Global.DEFAULT_APP_NAME,"---","---","---"));
 
             // Loop over the applications defined in the registry and add them to the listView
-            RegistryKey appExes = Registry.LocalMachine.OpenSubKey(Global.REG_APP_EXECUTABLES);
-            foreach (string subKeyName in appExes.GetSubKeyNames())
+            using (RegistryKey appExes = Registry.LocalMachine.OpenSubKey(Global.REG_APP_EXECUTABLES))
             {
-                using (RegistryKey tempKey = appExes.OpenSubKey(subKeyName))
+                foreach (string subKeyName in appExes.GetSubKeyNames())
                 {
-                    int appMatchType = Convert.ToInt32(tempKey.GetValue("AppMatchType", -1));
-                    this.listView_apps.Items.Add(this.createListViewItem(
-                        subKeyName,
-                        (string)tempKey.GetValue("AppExe"),
-                        (string)tempKey.GetValue("AppClassName"),
-                        appMatchType==-1? "" : appMatchType.ToString()
-                    ));
+                    using (RegistryKey tempKey = appExes.OpenSubKey(subKeyName))
+                    {
+                        int appMatchType = Convert.ToInt32(tempKey.GetValue("AppMatchType", -1));
+                        this.listView_apps.Items.Add(this.createListViewItem(
+                            subKeyName,
+                            (string)tempKey.GetValue("AppExe"),
+                            (string)tempKey.GetValue("AppClassName"),
+                            appMatchType == -1 ? "" : appMatchType.ToString()
+                        ));
+                    }
                 }
             }
-            appExes.Close();
         }
 
         private ListViewItem createListViewItem(string friendlyName, string exe, string className, string matchType)
@@ -110,14 +111,13 @@ namespace SynapticControl
             
             foreach (string regPath in Global.REG_APP_KEY_PATHS)
             {
-                RegistryKey regParent = Registry.LocalMachine.OpenSubKey(regPath, true);
-
-                // Delete the key tree for the application.
-                try { regParent.DeleteSubKeyTree(toRemove.Text); }
-                // If it raises an ArgumentException, ignore. Just means the application didn't have a key in that parent.
-                catch (ArgumentException) { }
-
-                regParent.Close();
+                using (RegistryKey regParent = Registry.LocalMachine.OpenSubKey(regPath, true))
+                {
+                    // Delete the key tree for the application.
+                    try { regParent.DeleteSubKeyTree(toRemove.Text); }
+                    // If it raises an ArgumentException, ignore. Just means the application didn't have a key in that parent.
+                    catch (ArgumentException) { }
+                }
             }
             // Remove the ListView entry for the item
             this.listView_apps.Items.Remove(toRemove);

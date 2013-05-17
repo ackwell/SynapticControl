@@ -37,22 +37,23 @@ namespace SynapticControl
             }
             
             // Try to open the registry key, won't nessicarily exist though (new keys, etc)
-            RegistryKey appDetails = Registry.LocalMachine.OpenSubKey(
-                    Global.REG_APP_EXECUTABLES + @"\" + this.appKey);
-            if (appDetails == null) return;
-
-            // Populate the text boxes
-            foreach (KeyValuePair<string, TextBox> pair in this.fieldMap)
+            using (RegistryKey appDetails = Registry.LocalMachine.OpenSubKey(
+                    Global.REG_APP_EXECUTABLES + @"\" + this.appKey))
             {
-                // Retrieve value if it's there
-                object value = appDetails.GetValue(pair.Key);
-                if (value != null)
-                {
-                    pair.Value.Text = value.ToString();
-                }
-            }
+                if (appDetails == null) return;
 
-            appDetails.Close();
+                // Populate the text boxes
+                foreach (KeyValuePair<string, TextBox> pair in this.fieldMap)
+                {
+                    // Retrieve value if it's there
+                    object value = appDetails.GetValue(pair.Key);
+                    if (value != null)
+                    {
+                        pair.Value.Text = value.ToString();
+                    }
+                }
+
+            }
         }
 
         private void saveAppDetails()
@@ -62,34 +63,33 @@ namespace SynapticControl
             if (this.appKey == Global.DEFAULT_APP_NAME) return;
 
             // Open the key we are editing, creating it if required
-            RegistryKey appDetails = Registry.LocalMachine.CreateSubKey(
-                Global.REG_APP_EXECUTABLES + @"\" + this.appKey);
+            using (RegistryKey appDetails = Registry.LocalMachine.CreateSubKey(
+                Global.REG_APP_EXECUTABLES + @"\" + this.appKey))
+                {
+                // Read data out of the text boxes, into the app details reg key
+                foreach (KeyValuePair<string, TextBox> pair in this.fieldMap)
+                {
+                    // If it's empty, delete the key (if it exists)
+                    if (pair.Value.Text == "")
+                    {
+                        appDetails.DeleteValue(pair.Key, false);
+                        continue;
+                    }
 
-            // Read data out of the text boxes, into the app details reg key
-            // NEED TO VALIDATE APPMATCHTYPE
-            foreach (KeyValuePair<string, TextBox> pair in this.fieldMap)
-            {
-                // If it's empty, delete the key (if it exists)
-                if (pair.Value.Text == "")
-                {
-                    appDetails.DeleteValue(pair.Key, false);
-                    continue;
-                }
-
-                // Save the values
-                if (pair.Key == "AppMatchType")
-                {
-                    int value;
-                    if (!int.TryParse(pair.Value.Text, out value)) continue;
-                    appDetails.SetValue(pair.Key, value, RegistryValueKind.DWord);
-                }
-                else
-                {
-                    string value = pair.Value.Text;
-                    appDetails.SetValue(pair.Key, value, RegistryValueKind.String);
+                    // Save the values
+                    if (pair.Key == "AppMatchType")
+                    {
+                        int value;
+                        if (!int.TryParse(pair.Value.Text, out value)) continue;
+                        appDetails.SetValue(pair.Key, value, RegistryValueKind.DWord);
+                    }
+                    else
+                    {
+                        string value = pair.Value.Text;
+                        appDetails.SetValue(pair.Key, value, RegistryValueKind.String);
+                    }
                 }
             }
-            appDetails.Close();
         }
 
         private void populateActionDetails()
@@ -102,30 +102,31 @@ namespace SynapticControl
             foreach (ListViewGroup group in this.listView_actions.Groups)
             {
                 // Try to open up the gesture subkey. If it doesn't exist, ignore. ActionEdit will handle it.
-                RegistryKey appGestureActions = Registry.LocalMachine.OpenSubKey(basePath + @"\" + (string)group.Tag);
-                if (appGestureActions == null) continue;
-
-                // Load up the individual actions
-                foreach (ListViewItem item in group.Items)
+                using (RegistryKey appGestureActions = Registry.LocalMachine.OpenSubKey(basePath + @"\" + (string)group.Tag)
                 {
-                    // Make sure the ListItems all have the two SubItems, set default text
-                    if (item.SubItems.Count == 1)
+                    if (appGestureActions == null) continue;
+
+                    // Load up the individual actions
+                    foreach (ListViewItem item in group.Items)
                     {
-                        item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                        // Make sure the ListItems all have the two SubItems, set default text
+                        if (item.SubItems.Count == 1)
+                        {
+                            item.SubItems.Add(new ListViewItem.ListViewSubItem());
+                        }
+                        item.SubItems[1].Text = this.appKey==Global.DEFAULT_APP_NAME?"(None)":"(Inherited)";
+
+                        // Get the ActionID. If it's null, got nothin' to do here.
+                        int? actionID = (int?)appGestureActions.GetValue((string)item.Tag);
+                        if (actionID == null) continue;
+
+                        // Now use the ID to get the pretty name~
+                        using (RegistryKey actionDetails = Registry.LocalMachine.OpenSubKey(Global.REG_ACTIONS + @"\" + actionID.ToString()))
+                        {
+                            item.SubItems[1].Text = actionDetails == null ? "(Invalid)" : (string)actionDetails.GetValue("ShortName");
+                        }
                     }
-                    item.SubItems[1].Text = this.appKey==Global.DEFAULT_APP_NAME?"(None)":"(Inherited)";
-
-                    // Get the ActionID. If it's null, got nothin' to do here.
-                    int? actionID = (int?)appGestureActions.GetValue((string)item.Tag);
-                    if (actionID == null) continue;
-
-                    // Now use the ID to get the pretty name~
-                    RegistryKey actionDetails = Registry.LocalMachine.OpenSubKey(Global.REG_ACTIONS + @"\" + actionID.ToString());
-                    item.SubItems[1].Text = actionDetails == null ? "(Invalid)" : (string)actionDetails.GetValue("ShortName");
-                    actionDetails.Close();
                 }
-
-                appGestureActions.Close();
             }
         }
 

@@ -78,7 +78,10 @@
             this.BackColor = System.Drawing.SystemColors.Window;
             this.ClientSize = new System.Drawing.Size(284, 261);
             this.Controls.Add(this.panel_actionEdit);
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "ActionEdit";
+            this.ShowInTaskbar = false;
             this.Text = "ActionEdit";
             this.Load += new System.EventHandler(this.ActionEdit_Load);
             this.panel_actionEdit.ResumeLayout(false);
